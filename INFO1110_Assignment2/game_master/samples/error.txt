@@ -1,0 +1,3 @@
+/home/final/
+./something.txt
+./mh.py

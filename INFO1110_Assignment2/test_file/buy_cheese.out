@@ -1,0 +1,40 @@
+You have 125 gold to spend.
+State [cheese quantity]: Successfully purchase 5 cheddar.
+You have 75 gold to spend.
+State [cheese quantity]: 
+You have 125 gold to spend.
+State [cheese quantity]: Successfully purchase 1 cheddar.
+You have 115 gold to spend.
+State [cheese quantity]: Successfully purchase 1 marble.
+You have 65 gold to spend.
+State [cheese quantity]: Successfully purchase 3 cheddar.
+You have 35 gold to spend.
+State [cheese quantity]: 
+You have 125 gold to spend.
+State [cheese quantity]: Must purchase positive amount of cheese.
+You have 125 gold to spend.
+State [cheese quantity]: 
+You have 125 gold to spend.
+State [cheese quantity]: Missing quantity.
+You have 125 gold to spend.
+State [cheese quantity]: 
+You have 125 gold to spend.
+State [cheese quantity]: Insufficient gold.
+You have 125 gold to spend.
+State [cheese quantity]: 
+You have 125 gold to spend.
+State [cheese quantity]: We don't sell !
+You have 125 gold to spend.
+State [cheese quantity]: 
+You have 0 gold to spend.
+State [cheese quantity]: Insufficient gold.
+You have 0 gold to spend.
+State [cheese quantity]: 
+You have 200 gold to spend.
+State [cheese quantity]: Successfully purchase 2 swiss.
+You have 0 gold to spend.
+State [cheese quantity]: 
+
+
+
+You have successfully pass all test cases!

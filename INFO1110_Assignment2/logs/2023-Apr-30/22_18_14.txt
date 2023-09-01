@@ -1,0 +1,255 @@
+    output = []
+    output.append(f'{timestamp} Start installation process.')
+    output.append(f'{timestamp} Extracting paths in configuration file.')
+    config_path = os.path.join(master, 'config.txt')
+    with open(config_path, 'r') as read_config:
+        config_file = {}
+        path_dict = {}
+        path_dict['file_path'] = []
+        current_key = None
+        config = read_config.readline().strip()
+        while config:
+            if config.startswith('/') and config.endswith('/'):
+                current_key = config
+                config_file[current_key] = []
+            elif current_key is not None and config.startswith('./'):
+                config_file[current_key].append(config)
+                path_dict['file_path'].append(os.path.join(current_key, config.lstrip("./")))
+            config = read_config.readline().strip()
+    output.append(f'Total directories to create: {len(config_file)}')
+    output.append(f'{timestamp} Create new directories.')
+    folder_index = 0
+    while folder_index < len(config_file):
+        config_keys = tuple(config_file.keys())
+        if os.path.exists(config_keys[folder_index]):
+            output.append(f'{config_keys[folder_index]} exists. Skip directory creation.')
+        else:
+            os.mkdir(config_keys[folder_index])
+            output.append(f'{config_keys[folder_index]} is created successfully.')
+        folder_index += 1
+    output.append(f'{timestamp} Extracting paths of all files in {master}.')
+    walk_master = next(os.walk(master))
+    master_root = walk_master[0]
+    master_folder = sorted(walk_master[1])
+    index_folder = 0
+    path_dict['all_file_master'], path_dict['all_folder_path'] = [], []
+    while index_folder < len(master_folder):
+        file_master = sorted(next(os.walk(sorted(master_folder)[index_folder]))[2])
+        index_file = 0
+        while index_file < len(file_master):
+            folder_file = os.path.join(master_root, master_folder[index_folder], file_master[index_file])
+            output.append(f'Found: {folder_file}')
+            path_dict['all_file_master'].append(file_master[index_file])
+            path_dict['all_folder_path'].append(folder_file)
+            index_file += 1
+        index_folder += 1
+    output.append(f'{timestamp}  Create new files.')
+    create_index = 0
+    while create_index < len(list(path_dict['file_path'])):
+        with open(list(path_dict['file_path'])[create_index], 'w') as creat_file:
+            creat_file.write('')
+        output.append(f"Creating file: {list(path_dict['file_path'])[create_index]}")
+        create_index += 1
+    output.append(f'{timestamp} Copying files.')
+    copy_index = 0
+    while copy_index < len(path_dict['all_file_master']):
+        origianl = path_dict['all_folder_path'][copy_index]
+        destination = path_dict['file_path'][copy_index]
+        output.append(f"Locating: {path_dict['all_file_master'][copy_index]}")
+        if os.path.exists(origianl) is False:
+            output.append(f"Original path: {origianl} is not found.")
+            output.append('Installation error...')
+            return output
+        else:
+            if os.path.exists(destination) is False:
+                output.append(f"Destination path: {destination} is not found.")
+                output.append('Installation error...')
+                return output
+            else:
+                shutil.copy2(origianl, destination)
+                output.append(f"Original path: {origianl}")
+                output.append(f"Destination path: {destination}")
+                output.append(f'{timestamp}  Installation complete.')
+        copy_index += 1
+    return output    output = []
+    output.append(f'{timestamp} Start installation process.')
+    output.append(f'{timestamp} Extracting paths in configuration file.')
+    config_path = os.path.join(master, 'config.txt')
+    with open(config_path, 'r') as read_config:
+        config_file = {}
+        path_dict = {}
+        path_dict['file_path'] = []
+        current_key = None
+        config = read_config.readline().strip()
+        while config:
+            if config.startswith('/') and config.endswith('/'):
+                current_key = config
+                config_file[current_key] = []
+            elif current_key is not None and config.startswith('./'):
+                config_file[current_key].append(config)
+                path_dict['file_path'].append(os.path.join(current_key, config.lstrip("./")))
+            config = read_config.readline().strip()
+    output.append(f'Total directories to create: {len(config_file)}')
+    output.append(f'{timestamp} Create new directories.')
+    folder_index = 0
+    while folder_index < len(config_file):
+        config_keys = tuple(config_file.keys())
+        if os.path.exists(config_keys[folder_index]):
+            output.append(f'{config_keys[folder_index]} exists. Skip directory creation.')
+        else:
+            os.mkdir(config_keys[folder_index])
+            output.append(f'{config_keys[folder_index]} is created successfully.')
+        folder_index += 1
+    output.append(f'{timestamp} Extracting paths of all files in {master}.')
+    walk_master = next(os.walk(master))
+    master_root = walk_master[0]
+    master_folder = sorted(walk_master[1])
+    index_folder = 0
+    path_dict['all_file_master'], path_dict['all_folder_path'] = [], []
+    while index_folder < len(master_folder):
+        file_master = sorted(next(os.walk(sorted(master_folder)[index_folder]))[2])
+        index_file = 0
+        while index_file < len(file_master):
+            folder_file = os.path.join(master_root, master_folder[index_folder], file_master[index_file])
+            output.append(f'Found: {folder_file}')
+            path_dict['all_file_master'].append(file_master[index_file])
+            path_dict['all_folder_path'].append(folder_file)
+            index_file += 1
+        index_folder += 1
+    output.append(f'{timestamp}  Create new files.')
+    create_index = 0
+    while create_index < len(list(path_dict['file_path'])):
+        with open(list(path_dict['file_path'])[create_index], 'w') as creat_file:
+            creat_file.write('')
+        output.append(f"Creating file: {list(path_dict['file_path'])[create_index]}")
+        create_index += 1
+    output.append(f'{timestamp} Copying files.')
+    copy_index = 0
+    while copy_index < len(path_dict['all_file_master']):
+        origianl = path_dict['all_folder_path'][copy_index]
+        destination = path_dict['file_path'][copy_index]
+        output.append(f"Locating: {path_dict['all_file_master'][copy_index]}")
+        if os.path.exists(origianl) is False:
+            output.append(f"Original path: {origianl} is not found.")
+            output.append('Installation error...')
+            return output
+        else:
+            if os.path.exists(destination) is False:
+                output.append(f"Destination path: {destination} is not found.")
+                output.append('Installation error...')
+                return output
+            else:
+                shutil.copy2(origianl, destination)
+                output.append(f"Original path: {origianl}")
+                output.append(f"Destination path: {destination}")
+                output.append(f'{timestamp}  Installation complete.')
+        copy_index += 1
+    return output    output = []
+    output.append(f'{timestamp} Start installation process.')
+    output.append(f'{timestamp} Extracting paths in configuration file.')
+    config_path = os.path.join(master, 'config.txt')
+    with open(config_path, 'r') as read_config:
+        config_file = {}
+        path_dict = {}
+        path_dict['file_path'] = []
+        current_key = None
+        config = read_config.readline().strip()
+        while config:
+            if config.startswith('/') and config.endswith('/'):
+                current_key = config
+                config_file[current_key] = []
+            elif current_key is not None and config.startswith('./'):
+                config_file[current_key].append(config)
+                path_dict['file_path'].append(os.path.join(current_key, config.lstrip("./")))
+            config = read_config.readline().strip()
+    output.append(f'Total directories to create: {len(config_file)}')
+    output.append(f'{timestamp} Create new directories.')
+    folder_index = 0
+    while folder_index < len(config_file):
+        config_keys = tuple(config_file.keys())
+        if os.path.exists(config_keys[folder_index]):
+            output.append(f'{config_keys[folder_index]} exists. Skip directory creation.')
+        else:
+            os.mkdir(config_keys[folder_index])
+            output.append(f'{config_keys[folder_index]} is created successfully.')
+        folder_index += 1
+    output.append(f'{timestamp} Extracting paths of all files in {master}.')
+    walk_master = next(os.walk(master))
+    master_root = walk_master[0]
+    master_folder = sorted(walk_master[1])
+    index_folder = 0
+    path_dict['all_file_master'], path_dict['all_folder_path'] = [], []
+    while index_folder < len(master_folder):
+        file_master = sorted(next(os.walk(sorted(master_folder)[index_folder]))[2])
+        index_file = 0
+        while index_file < len(file_master):
+            folder_file = os.path.join(master_root, master_folder[index_folder], file_master[index_file])
+            output.append(f'Found: {folder_file}')
+            path_dict['all_file_master'].append(file_master[index_file])
+            path_dict['all_folder_path'].append(folder_file)
+            index_file += 1
+        index_folder += 1
+    output.append(f'{timestamp}  Create new files.')
+    create_index = 0
+    while create_index < len(list(path_dict['file_path'])):
+        with open(list(path_dict['file_path'])[create_index], 'w') as creat_file:
+            creat_file.write('')
+        output.append(f"Creating file: {list(path_dict['file_path'])[create_index]}")
+        create_index += 1
+    output.append(f'{timestamp} Copying files.')
+    copy_index = 0
+    while copy_index < len(path_dict['all_file_master']):
+        origianl = path_dict['all_folder_path'][copy_index]
+        destination = path_dict['file_path'][copy_index]
+        output.append(f"Locating: {path_dict['all_file_master'][copy_index]}")
+        if os.path.exists(origianl) is False:
+            output.append(f"Original path: {origianl} is not found.")
+            output.append('Installation error...')
+            return output
+        else:
+            if os.path.exists(destination) is False:
+                output.append(f"Destination path: {destination} is not found.")
+                output.append('Installation error...')
+                return output
+            else:
+                shutil.copy2(origianl, destination)
+                output.append(f"Original path: {origianl}")
+                output.append(f"Destination path: {destination}")
+                output.append(f'{timestamp}  Installation complete.')
+        copy_index += 1
+    return output30 Apr 2023 22:18:14 Start installation process.
+30 Apr 2023 22:18:14 Extracting paths in configuration file.
+Total directories to create: 2
+30 Apr 2023 22:18:14 Create new directories.
+/home/files/ exists. Skip directory creation.
+/home/samples/ exists. Skip directory creation.
+30 Apr 2023 22:18:14 Extracting paths of all files in /home/master/.
+Found: /home/master/files/animals.txt
+Found: /home/master/files/history.txt
+Found: /home/master/files/list.txt
+Found: /home/master/files/names.txt
+Found: /home/master/samples/count_me.txt
+Found: /home/master/samples/error.txt
+30 Apr 2023 22:18:14  Create new files.
+Creating file: /home/files/animals.txt
+Creating file: /home/files/history.txt
+Creating file: /home/files/list.txt
+Creating file: /home/files/names.txt
+Creating file: /home/samples/count_me.txt
+30 Apr 2023 22:18:14 Copying files.
+Locating: animals.txt
+Original path: /home/master/files/animals.txt
+Destination path: /home/files/animals.txt
+Locating: history.txt
+Original path: /home/master/files/history.txt
+Destination path: /home/files/history.txt
+Locating: list.txt
+Original path: /home/master/files/list.txt
+Destination path: /home/files/list.txt
+Locating: names.txt
+Original path: /home/master/files/names.txt
+Destination path: /home/files/names.txt
+Locating: count_me.txt
+Original path: /home/master/samples/count_me.txt
+Destination path: /home/samples/count_me.txt
+30 Apr 2023 22:18:14  Installation complete.

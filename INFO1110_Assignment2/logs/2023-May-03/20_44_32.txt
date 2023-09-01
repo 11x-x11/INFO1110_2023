@@ -1,0 +1,26 @@
+03 May 2023 20:44:32 Start verification process.
+03 May 2023 20:44:32 Extracting paths in configuration file.
+Total directories to check: 2
+03 May 2023 20:44:32 Checking if directories exists.
+/home/files/ is found!
+/home/samples/ is found!
+03 May 2023 20:44:32 Extracting files in configuration file.
+File to check: /home/files/animals.txt
+File to check: /home/files/history.txt
+File to check: /home/files/list.txt
+File to check: /home/files/names.txt
+File to check: /home/samples/count_me.txt
+Total files to check: 5
+03 May 2023 20:44:32 Checking if files exists.
+/home/files/animals.txt found!
+/home/files/history.txt found!
+/home/files/list.txt found!
+/home/files/names.txt found!
+/home/samples/count_me.txt found!
+03 May 2023 20:44:32 Check contents with master copy.
+/home/files/animals.txt is same as /home/master/files/animals.txt: True
+/home/files/history.txt is same as /home/master/files/history.txt: True
+/home/files/list.txt is same as /home/master/files/list.txt: True
+/home/files/names.txt is same as /home/master/files/names.txt: True
+/home/samples/count_me.txt is same as /home/master/samples/count_me.txt: True
+03 May 2023 20:44:32  Verification complete.

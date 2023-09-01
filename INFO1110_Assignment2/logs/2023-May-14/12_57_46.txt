@@ -1,0 +1,36 @@
+14 May 2023 12:57:46 Start installation process.
+14 May 2023 12:57:46 Extracting paths in configuration file.
+Total directories to create: 2
+14 May 2023 12:57:46 Create new directories.
+/home/files/ exists. Skip directory creation.
+/home/samples/ exists. Skip directory creation.
+14 May 2023 12:57:46 Extracting paths of all files in /home/master/.
+Found: /home/master/files/animals.txt
+Found: /home/master/files/history.txt
+Found: /home/master/files/list.txt
+Found: /home/master/files/names.txt
+Found: /home/master/samples/count_me.txt
+Found: /home/master/samples/error.txt
+14 May 2023 12:57:46  Create new files.
+Creating file: /home/files/animals.txt
+Creating file: /home/files/history.txt
+Creating file: /home/files/list.txt
+Creating file: /home/files/names.txt
+Creating file: /home/samples/count_me.txt
+14 May 2023 12:57:46 Copying files.
+Locating: animals.txt
+Original path: /home/master/files/animals.txt
+Destination path: /home/files/animals.txt
+Locating: history.txt
+Original path: /home/master/files/history.txt
+Destination path: /home/files/history.txt
+Locating: list.txt
+Original path: /home/master/files/list.txt
+Destination path: /home/files/list.txt
+Locating: names.txt
+Original path: /home/master/files/names.txt
+Destination path: /home/files/names.txt
+Locating: count_me.txt
+Original path: /home/master/samples/count_me.txt
+Destination path: /home/samples/count_me.txt
+14 May 2023 12:57:46  Installation complete.
